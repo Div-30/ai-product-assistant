@@ -16,3 +16,14 @@ def search_products(query: str) -> str:
     if not results:
         return f"No products found matching '{query}'."
     return json.dumps(results, indent=2)
+
+def check_price(product_id: str) -> str:
+    product_id_upper = product_id.strip().upper()
+    for product in PRODUCTS:
+        if product_id["id"] == product_id_upper:
+            return (
+                f"The price of {product['name']}"
+                f"(ID: {product['id']}) is"
+                f"{product['price']:,} RWF."
+            )
+    return f"Product with ID '{product_id}' not found."

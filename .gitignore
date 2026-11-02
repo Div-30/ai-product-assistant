@@ -2,4 +2,5 @@
 .venv/
 __pycache__/
 logs/
-*.pyc
+*.pyc.deepeval/
+.pytest_cache/

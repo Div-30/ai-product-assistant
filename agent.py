@@ -47,7 +47,6 @@ Never invent or guess prices or product details."""
 def run_agent(user_message: str) -> str:
     logger.info(f"Request started: {user_message}")
     start_time = time.time()
-    messages = [{"role": "user", "content": user_message}]
     try:
         messages = [{"role": "user", "content": user_message}]
         while True:
@@ -61,6 +60,8 @@ def run_agent(user_message: str) -> str:
             if response.stop_reason == "end_turn":
                 for block in response.content:
                     if hasattr(block, "text"):
+                        latency = time.time() - start_time
+                        logger.info(f"Request completed successfully | Latency: {latency:.2f}s")
                         return block.text
             if response.stop_reason == "tool_use":
                 messages.append({"role": "assistant", "content": response.content})
@@ -69,6 +70,7 @@ def run_agent(user_message: str) -> str:
                     if block.type == "tool_use":
                         tool_name = block.name
                         tool_input = block.input
+                        logger.debug(f"Tool called: {tool_name} | Input: {tool_input}")
                         try:
                             if tool_name == "search_product":
                                 result = search_products(tool_input["query"])
@@ -76,9 +78,10 @@ def run_agent(user_message: str) -> str:
                                 result = check_price(tool_input["product_id"])
                             else: 
                                 result = "Unknown tool."
-                            logger.debug(f"Tool failed: {tool_name} | Error: {str(e)}")
+                            logger.debug(f"Tool succeeded: {tool_name}")
                         except Exception as e:
                                 result = f"Tool error: {str(e)}"
+                                logger.error(f"Tool failed: {tool_name} | Error: {str(e)}")
                         tool_results.append({
                             "type": "tool_result",
                             "tool_use_id": block.id,

@@ -62,13 +62,15 @@ def run_agent(user_message: str) -> str:
                 if block.type == "tool_use":
                     tool_name = block.name
                     tool_input = block.input
-
+                try:
                     if tool_name == "search_product":
                         result = search_products(tool_input["query"])
                     elif tool_name == "check_price":
                         result = check_price(tool_input["product_id"])
                     else: 
                         result = "Unknown tool."
+                except Exception as e:
+                    result = f"Tool error: {str(e)}"
                     tool_results.append({
                         "type": "tool_result",
                         "tool_use_id": block.id,

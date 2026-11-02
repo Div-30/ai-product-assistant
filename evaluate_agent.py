@@ -92,10 +92,10 @@ def main():
         for metric in metrics:
             metric.measure(test_case)
             status = "PASS" if metric.is_successful() else "FAIL"
-            print(f"  {metric.__class__.__name__}:")
-            print(f"    Score  : {metric.score:.2f}")
-            print(f"    Result : {status}")
-            print(f"    Reason : {metric.reason}")
+            print(f"{metric.__class__.__name__}:")
+            print(f"Score  : {metric.score:.2f}")
+            print(f"Result : {status}")
+            print(f"Reason : {metric.reason}")
 
 if __name__ == "__main__":
     main()

@@ -17,9 +17,9 @@ TOOLS = [
                     "type": "string",
                     "description": "The search term to look up in the catalogue"
                 }
-            }
-        },
-        "required": ["query"]
+            },
+            "required": ["query"]
+        }
     },
     {
         "name": "check_price",

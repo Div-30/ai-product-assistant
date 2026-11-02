@@ -20,7 +20,7 @@ def search_products(query: str) -> str:
 def check_price(product_id: str) -> str:
     product_id_upper = product_id.strip().upper()
     for product in PRODUCTS:
-        if product_id["id"] == product_id_upper:
+        if product["id"] == product_id_upper:
             return (
                 f"The price of {product['name']}"
                 f"(ID: {product['id']}) is"

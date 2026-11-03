@@ -1,7 +1,7 @@
 # AI Product Assistant
     An intelligent product assistant built with **Claude Haiku**, equipped with tool-use capabilities,
     evaluated with **DeepEval**, tested using **pytest**, and monitored via Python's native logging
-    framework.
+    framework
 
 ## Architecture & Tools
 
